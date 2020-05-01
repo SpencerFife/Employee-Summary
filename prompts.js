@@ -36,8 +36,29 @@ async function managerPrompt() {
       answers.managerEmail,
       answers.managerOfficeNumber
     );
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-    console.log(answers, manager);
+async function addTeamMember() {
+  try {
+    const { teamMember } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "teamMember",
+        message: "Which team member would you like to add?",
+        choices: ["Engineer", "Intern", "I'm done"],
+      },
+    ]);
+
+    if (teamMember === "Engineer") {
+      await engineerPrompt();
+    } else if (teamMember === "Intern") {
+      await internPrompt();
+    } else {
+      console.log("I'm done");
+    }
   } catch (error) {
     console.error(error);
   }
@@ -75,7 +96,7 @@ async function engineerPrompt() {
       answers.engineerGitHub
     );
 
-    console.log(answers, engineer);
+    await addTeamMember();
   } catch (error) {
     console.error(error);
   }
@@ -113,8 +134,15 @@ async function internPrompt() {
       answers.internSchool
     );
 
-    console.log(answers, intern);
+    await addTeamMember();
   } catch (error) {
     console.error(error);
   }
 }
+
+module.exports = {
+  managerPrompt,
+  engineerPrompt,
+  internPrompt,
+  addTeamMember,
+};
