@@ -3,6 +3,7 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 const inquirer = require("inquirer");
+const teamArray = [];
 
 async function managerPrompt() {
   try {
@@ -36,6 +37,8 @@ async function managerPrompt() {
       answers.managerEmail,
       answers.managerOfficeNumber
     );
+
+    teamArray.push(manager);
   } catch (error) {
     console.error(error);
   }
@@ -58,6 +61,7 @@ async function addTeamMember() {
       await internPrompt();
     } else {
       console.log("I'm done");
+      //create generated HTML, writefile
     }
   } catch (error) {
     console.error(error);
@@ -95,6 +99,8 @@ async function engineerPrompt() {
       answers.engineerEmail,
       answers.engineerGitHub
     );
+
+    teamArray.push(engineer);
 
     await addTeamMember();
   } catch (error) {
@@ -134,6 +140,8 @@ async function internPrompt() {
       answers.internSchool
     );
 
+    teamArray.push(intern);
+
     await addTeamMember();
   } catch (error) {
     console.error(error);
@@ -145,4 +153,5 @@ module.exports = {
   engineerPrompt,
   internPrompt,
   addTeamMember,
+  teamArray,
 };
