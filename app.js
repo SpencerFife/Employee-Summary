@@ -1,19 +1,7 @@
 "use strict";
 
-const path = require("path");
-const fs = require("fs");
 const render = require("./templates/generateHTML");
-const { managerPrompt, addTeamMember, teamArray } = require("./prompts");
-
-// function generateTeam() {
-//   fs.writeFile(output, render(teamArray), (err) => {
-//     if (err) {
-//       console.error(err);
-//     } else {
-//       console.log("You've successfully built your team.");
-//     }
-//   });
-// }
+const { managerPrompt, addTeamMember } = require("./prompts");
 
 async function createTeam() {
   try {
