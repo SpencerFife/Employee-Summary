@@ -2,10 +2,18 @@
 
 const path = require("path");
 const fs = require("fs");
-const render = require("./lib/generateHTML");
-const { managerPrompt, addTeamMember } = require("./prompts");
+const render = require("./templates/generateHTML");
+const { managerPrompt, addTeamMember, teamArray } = require("./prompts");
 
-const output = path.resolve(__dirname, "output", "outputTeam.html");
+// function generateTeam() {
+//   fs.writeFile(output, render(teamArray), (err) => {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       console.log("You've successfully built your team.");
+//     }
+//   });
+// }
 
 async function createTeam() {
   try {
@@ -13,8 +21,7 @@ async function createTeam() {
     await managerPrompt();
     await addTeamMember();
   } catch (error) {
-    console.error(error);
+    console.error("Something went wrong while building your team...", error);
   }
 }
-
 createTeam();
